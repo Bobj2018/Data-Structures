@@ -1,4 +1,4 @@
-from singly_linked_list import Node, LinkedList
+from singly_linked_list import LinkedList
 
 """
 A stack is a data structure whose primary purpose is to store and
@@ -45,7 +45,6 @@ class Stack:
 
     def pop(self):
         if (self.size > 0):
-            value = self.storage.head.get_value()
-            self.storage.remove_head()
+            value = self.storage.remove_head()
             self.size -= 1
             return value
