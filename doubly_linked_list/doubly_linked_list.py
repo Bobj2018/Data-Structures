@@ -50,15 +50,7 @@ class DoublyLinkedList:
     """
     def remove_from_head(self):
         tmp = self.head
-        if self.head is None:
-            return
-        elif self.head is self.tail:
-            self.head = None
-            self.tail = None
-        else:
-            self.head = self.head.next
-            self.head.prev = None
-        self.length -= 1
+        self.delete(self.head)
         return tmp.value
 
     """
@@ -91,15 +83,7 @@ class DoublyLinkedList:
     """
     def remove_from_tail(self):
         tmp = self.head
-        if self.tail is None:
-            return None
-        elif self.tail is self.head:
-            self.head = None
-            self.tail = None
-        else:
-            self.tail = self.tail.prev
-            self.tail.next = None
-        self.length -= 1
+        self.delete(self.tail)
         return tmp.value
 
 
@@ -149,10 +133,12 @@ class DoublyLinkedList:
     in the List.
     """
     def get_max(self):
-        result = 0
+        if self.head is None:
+            return None
+        max_value = self.head.value
         current_node = self.head
         while current_node is not None:
-            if (current_node.value > result):
-                result = current_node.value
+            if current_node.value > max_value:
+                max_value = current_node.value
             current_node = current_node.next
-        return result
+        return max_value

@@ -1,7 +1,9 @@
+import json
+
 """
-Binary search trees are a data structure that enforce an ordering over 
-the data they store. That ordering in turn makes it a lot more efficient 
-at searching for a particular piece of data in the tree. 
+Binary search trees are a data structure that enforce an ordering over
+the data they store. That ordering in turn makes it a lot more efficient
+at searching for a particular piece of data in the tree.
 
 This part of the project comprises two days:
 1. Implement the methods `insert`, `contains`, `get_max`, and `for_each`
@@ -17,20 +19,52 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        if value < self.value:
+            if self.left is None:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+
+        if value >= self.value:
+            if self.right is None:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        node = self
+        while node:
+            if node.value == target:
+                return True
+            else:
+                node = node.right
+        return False
+
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        current_max = self.value
+        node = self
+
+        while node is not None:
+            if node.value > current_max:
+                current_max = node.value
+            node = node.right
+
+        return current_max
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
+
+
+
 
     # Part 2 -----------------------
 
@@ -60,9 +94,12 @@ class BSTNode:
     def post_order_dft(self):
         pass
 
+    def __repr__(self):
+        return f"BSTNode({self.value})"
 """
 This code is necessary for testing the `print` methods
 """
+
 bst = BSTNode(1)
 
 bst.insert(8)
@@ -80,6 +117,6 @@ print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
-bst.in_order_dft()
+bst.in_order_print()
 print("post order")
-bst.post_order_dft()  
+bst.post_order_dft()
