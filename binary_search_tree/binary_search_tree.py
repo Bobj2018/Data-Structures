@@ -1,4 +1,6 @@
 import json
+from stack import Stack
+from queue import Queue
 
 """
 Binary search trees are a data structure that enforce an ordering over
@@ -57,9 +59,10 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        fn(self.value)
+
         if self.left:
             self.left.for_each(fn)
+        fn(self.value)
         if self.right:
             self.right.for_each(fn)
 
@@ -71,28 +74,70 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self.left:
+            self.left.in_order_print()
+        print(self.value)
+        if self.right:
+            self.right.in_order_print()
+
+
+
+
+
+
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        pass
+        queue = Queue()
+        queue.enqueue(self)
+        while len(queue) > 0:
+            node = queue.dequeue()
+            print(node.value)
+            if node.left:
+                queue.enqueue(node.left)
+            if node.right:
+                queue.enqueue(node.right)
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        pass
+        s = Stack()
+        s.push(self)
+
+        while len(s) > 0:
+            node = s.pop()
+
+            print(node.value)
+
+            if node.left:
+                s.push(node.left)
+            if node.right:
+                s.push(node.right)
+
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
-        pass
+        print(self.value)
+        if self.left:
+            self.left.pre_order_dft()
+        if self.right:
+            self.right.pre_order_dft()
 
     # Print Post-order recursive DFT
     def post_order_dft(self):
-        pass
+
+        if self.left:
+            self.left.post_order_dft()
+        if self.right:
+            self.right.post_order_dft()
+        print(self.value)
 
     def __repr__(self):
         return f"BSTNode({self.value})"
@@ -111,6 +156,7 @@ bst.insert(4)
 bst.insert(2)
 
 bst.bft_print()
+print('***')
 bst.dft_print()
 
 print("elegant methods")
