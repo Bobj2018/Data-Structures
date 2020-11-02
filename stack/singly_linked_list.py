@@ -61,11 +61,13 @@ class LinkedList:
                 self.head = None
                 self.tail = None
             else:
-                temp_node = self.head
-                while temp_node.get_next_node() is not self.tail:
+                temp_node = self.head.get_next_node()
+                prev_node = self.head
+                while temp_node.get_next_node() is not None:
+                    prev_node = temp_node
                     temp_node = temp_node.get_next_node()
-                temp_node.set_next_node(None)
-                self.tail = temp_node
+                prev_node.set_next_node(None)
+                self.tail = prev_node
             return value
 
     def contains(self, value):

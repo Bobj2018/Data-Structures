@@ -47,4 +47,4 @@ class Stack:
         if (self.size > 0):
             value = self.storage.remove_head()
             self.size -= 1
-            return value
+            return value.get_value()

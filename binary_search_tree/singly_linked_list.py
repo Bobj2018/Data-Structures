@@ -43,7 +43,7 @@ class LinkedList:
         if self.head is None:
             return None
         else:
-            value = self.head.get_value()
+            value = self.head
             if self.head == self.tail:
                 self.head = None
                 self.tail = None
